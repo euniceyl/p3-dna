@@ -5,7 +5,12 @@ public class LinkStrand implements IDnaStrand {
     private class Node {
         String info;
         Node next;
-        private Node(String x, Node node) {
+
+        Node (String info) {
+            this.info = info;
+        }
+
+        Node(String x, Node node) {
             info = x;
             next = node;
         }
