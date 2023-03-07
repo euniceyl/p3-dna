@@ -93,8 +93,8 @@ public class LinkStrand implements IDnaStrand {
 
         while (myCurrent != null) {
             StringBuilder s = new StringBuilder(myCurrent.info);
-            String revString = s.reverse();
-            Node rev = new Node(revString.toString());
+            String revString = s.reverse().toString();
+            Node rev = new Node(revString);
 
             revStrand.mySize = revStrand.mySize + rev.info.length();
             rev.next = revStrand.myFirst;
