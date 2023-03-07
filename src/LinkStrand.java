@@ -120,7 +120,7 @@ public class LinkStrand implements IDnaStrand {
             throw new IndexOutOfBoundsException();
         }
 
-        if (index <= myIndex) {
+        if (index < myIndex) {
             myIndex = 0;
             myLocalIndex = 0;
             myCurrent = myFirst;
@@ -129,7 +129,7 @@ public class LinkStrand implements IDnaStrand {
         myLocalIndex = myLocalIndex + (index - myIndex);
         myIndex = index;
 
-        while (myCurrent != myLast && myLocalIndex >= myCurrent.info.length()) {
+        while (myCurrent.next != null && myLocalIndex >= myCurrent.info.length()) {
             myLocalIndex = myLocalIndex - myCurrent.info.length();
             myCurrent = myCurrent.next;
         }
