@@ -74,11 +74,11 @@ public class LinkStrand implements IDnaStrand {
     @Override
     public String toString() {
         StringBuilder strand = new StringBuilder();
-        myCurrent = myFirst;
+        Node x = myFirst;
         
-        while (myCurrent != null) {
-            strand.append(myCurrent.info);
-            myCurrent = myCurrent.next;
+        while (x != null) {
+            strand.append(x.info);
+            x = x.next;
         }
 
         return strand.toString();
@@ -88,18 +88,18 @@ public class LinkStrand implements IDnaStrand {
     public IDnaStrand reverse() {
         // TODO Auto-generated method stub
         //throw new UnsupportedOperationException("Unimplemented method 'reverse'");
-        Node myCurrent = myFirst;
+        Node x = myFirst;
         LinkStrand revStrand = new LinkStrand();
 
-        while (myCurrent != null) {
-            StringBuilder s = new StringBuilder(myCurrent.info);
+        while (x != null) {
+            StringBuilder s = new StringBuilder(x.info);
             String revString = s.reverse().toString();
             Node rev = new Node(revString);
 
             revStrand.mySize = revStrand.mySize + rev.info.length();
             rev.next = revStrand.myFirst;
             revStrand.myFirst = rev;
-            myCurrent = myCurrent.next;
+            x = x.next;
         }
 
         return revStrand;
@@ -116,11 +116,16 @@ public class LinkStrand implements IDnaStrand {
     public char charAt(int index) {
         // TODO Auto-generated method stub
         //throw new UnsupportedOperationException("Unimplemented method 'charAt'");
+        // System.out.println(index);
+        // System.out.println(this.toString());
+        //System.out.println(myIndex +" "+ mySize + " " + myLocalIndex + " " + index);
+        //System.out.println(myCurrent.info.length());
+
         if (index < 0 || index >= this.mySize) {
             throw new IndexOutOfBoundsException();
         }
 
-        if (index < myIndex) {
+        if (index <= myIndex) {
             myIndex = 0;
             myLocalIndex = 0;
             myCurrent = myFirst;
@@ -129,7 +134,7 @@ public class LinkStrand implements IDnaStrand {
         myLocalIndex = myLocalIndex + (index - myIndex);
         myIndex = index;
 
-        while (myCurrent.next != null && myLocalIndex >= myCurrent.info.length()) {
+        while (myCurrent != myLast && myLocalIndex >= myCurrent.info.length()) {
             myLocalIndex = myLocalIndex - myCurrent.info.length();
             myCurrent = myCurrent.next;
         }
